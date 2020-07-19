@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import axios from "axios";
 import "./App.css";
+import MealGallery from './MealGallery.js'
 
 class App extends Component {
 	constructor() {
@@ -42,7 +43,7 @@ class App extends Component {
 						meals: result.meals,
 					},
 					() => {
-						console.log(this.state.meals);
+						console.log(this.state.meals[0]);
 					}
 				);
 			});
@@ -63,10 +64,16 @@ class App extends Component {
 				<ul className="gallery">
 					{this.state.meals
 						? this.state.meals.map((i) => {
-								return <li key={i.idMeal}>{i.strMeal}</li>;
+								return (
+									<li key={i.idMeal}>
+										{i.strMeal}
+										<img className="galleryImg" src={i.strMealThumb} alt="" />
+									</li>
+								);
 						  })
 						: null}
 				</ul>
+        <MealGallery result={this.state.meals}/>
 			</div>
 		);
 	}
