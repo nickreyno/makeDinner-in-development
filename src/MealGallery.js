@@ -5,17 +5,18 @@ class MealGallery extends Component {
 		super();
 	}
 	componentDidMount() {
-		console.log(this.props);
+        console.log(this.props.resultExt);
+        console.log(this.props)
 	}
 
 	render() {
 		return (
 			<div>
-				{this.props.result.map((i) => {
+				{this.props.resultExt.map((i) => {
 					return (
-						<li key={i.idMeal}>
-							{i.strMeal}
-							<img className="galleryImg" src={i.strMealThumb} alt="" />
+						<li key={i.id}>
+                            <p>{i.title}</p>
+                            <img className="galleryImg" src={i.image} alt="" />
 						</li>
 					);
 				})}

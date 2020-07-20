@@ -12,7 +12,21 @@ code {
     monospace;
 }
 
+button {
+  font-size: 28px;
+  padding: 10px;
+  margin: 10px;
+  border: none;
+  background: tan;
+  border-radius: 5px;
+}
+
+li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .galleryImg {
-  width: 50px;
+  width: 50%;
   height: auto;
 }
