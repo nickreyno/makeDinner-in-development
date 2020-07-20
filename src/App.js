@@ -25,7 +25,7 @@ class App extends Component {
 	};
 
 	getResults = (chosenWord) => {
-		chosenWord = "chicken";
+		// chosenWord = "chicken";
 		axios({
 			url: `https://www.themealdb.com/api/json/v1/1/filter.php`,
 			method: "GET",
@@ -63,17 +63,8 @@ class App extends Component {
 				</form>
 				<ul className="gallery">
 					{this.state.meals
-						? this.state.meals.map((i) => {
-								return (
-									<li key={i.idMeal}>
-										{i.strMeal}
-										<img className="galleryImg" src={i.strMealThumb} alt="" />
-									</li>
-								);
-						  })
-						: null}
+						? <MealGallery result={this.state.meals}/> : null}
 				</ul>
-        <MealGallery result={this.state.meals}/>
 			</div>
 		);
 	}
