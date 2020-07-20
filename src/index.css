@@ -12,6 +12,7 @@ html{
   font-size:  62.5%;
   font-family: sans-serif;
 }
+
 button {
   font-size: 20px;
   padding: 10px;
@@ -21,16 +22,12 @@ button {
   border-radius: 5px;
 }
 
-li {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 .galleryImg {
   width: 20%;
   height: auto;
 }
 
+/* home page styles */
 header {
   width: 100%;
   height: 55vh;
@@ -68,6 +65,7 @@ nav {
   margin: 10px;
   width: 100%;
   display: flex;
+  flex-direction: row;
 }
 
 .feature img {
