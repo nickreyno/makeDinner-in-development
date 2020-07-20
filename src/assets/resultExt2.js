@@ -1,4 +1,4 @@
-[
+const resultExt2 = [
   {
     "vegetarian": true,
     "vegan": true,
@@ -2509,3 +2509,5 @@
     "originalId": null
   }
 ]
+
+export default resultExt2;

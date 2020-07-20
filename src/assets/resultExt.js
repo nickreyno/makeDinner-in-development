@@ -1,4 +1,4 @@
-[{
+const resultExt = [{
   "vegetarian": true,
   "vegan": true,
   "glutenFree": true,
@@ -1627,3 +1627,5 @@
   "originalId": null
 }
 ]
+
+export default resultExt;
