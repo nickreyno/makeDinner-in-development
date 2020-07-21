@@ -1,0 +1,38 @@
+h2 {
+	font-size: 3rem;
+	color: $accent2;
+	text-align: center;
+	margin: 20px auto;
+	width: 100%;
+	display: inline-block;
+}
+
+.homePageRecipes {
+	@include flex(row, space-between);
+	flex-wrap: wrap;
+
+	.feature {
+		width: 100%;
+		margin: 10px;
+		a {
+			@include flex(row, space-between);
+		}
+		img {
+			width: calc(50% - 10px);
+		}
+	}
+
+	.support {
+		width: calc(25% - 20px);
+		margin: 10px;
+
+		img {
+			width: 100%;
+		}
+	}
+}
+
+footer {
+	width: 100%;
+	background: $accent1;
+}

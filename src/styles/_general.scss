@@ -13,14 +13,21 @@ p {
   margin:0;
 }
 
-button {
-  font-size: 20px;
-  padding: 10px;
-  margin: 10px;
-  border: none;
-  background: tan;
-  border-radius: 5px;
+a {
+  display: inline-block;
+  text-decoration: none;
+  color: inherit
 }
+
+.wrapper {
+  width: 80vw;
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative;
+}
+  main .wrapper {
+    // background: $background;
+  }
 
 .galleryImg {
   width: 20%;
@@ -34,42 +41,21 @@ header {
   background: url(../assets/header.jpg);
   background-size: cover;
   background-position-y: center;
-  display:flex;
-  flex-direction: column;
-  justify-content: center;
+  @include flex(column, center);
 }
 
 h1 {
   font-size: 8rem;
-  color: #617e7c;
+  color: $primary;
   text-align: center;
 }
 
-nav {
-  width: 100%;
-  background:white;
-  box-shadow: 0 0 4px black;
-  padding: 10px;
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.wrapper {
-  width: 80vw;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-.feature {
-  margin: 10px;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-}
-
-.feature img {
-  width: 50%;
-  margin:0;
+button {
+  font-size: 20px;
+  padding: 5px;
+  margin: 0 5px;
+  border: none;
+  background: $background;
+  border-radius: 5px;
+  color: $accent2;
 }

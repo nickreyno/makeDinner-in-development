@@ -1,0 +1,34 @@
+.recipePage{
+    header {
+        @include flex(column);
+        position: relative;
+        margin-top: 41px;
+        background: url(../assets/recipeHeader.jpg);
+        background-size: cover;
+        background-position-y:center;
+        background-attachment: fixed;
+        height: 40vh;
+        h2{
+            color: white;
+            font-size: 7rem;
+            text-shadow: 2px 4px 2px $secondary;
+        }
+    }
+
+    .test {
+        font-size: 2rem;
+
+        a {
+            text-decoration: underline;
+        }
+    }
+
+
+
+
+
+
+
+
+
+}

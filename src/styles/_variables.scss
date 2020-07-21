@@ -1,0 +1,22 @@
+// $primary: #617e7c;
+$primary: #6A8A87;
+$secondary: #6f7568;
+$accent1: #E78F4B;
+$accent2: #522a27;
+$background: #ece2d0;
+
+
+@mixin flex($direction: row, $justify: center, $align: center) {
+	display: flex;
+	flex-direction: $direction;
+	justify-content: $justify;
+	align-items: $align;
+}
+
+
+ul,
+ol {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}

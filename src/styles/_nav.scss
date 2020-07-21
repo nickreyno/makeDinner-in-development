@@ -1,0 +1,33 @@
+nav {
+	width: 100%;
+	background: white;
+	box-shadow: 0 0 4px black;
+	padding: 5px;
+    position: fixed;
+    top:0;
+    left:0;
+	z-index: 2;
+
+	.wrapper {
+		@include flex(row, space-between, center);
+	}
+}
+.searchForm {
+	@include flex(row, center, stretch);
+	.searchField {
+		border-radius: 10px 0 0 10px;
+		border: 2px solid $background;
+	}
+	.searchButton {
+		margin: 0;
+		border-radius: 0 10px 10px 0;
+	}
+
+	.left {
+		justify-self: flex-start;
+	}
+
+	.right {
+		justify-self: flex-end;
+	}
+}
