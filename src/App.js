@@ -90,7 +90,7 @@ class App extends Component {
 				<Fragment>
 					<nav>
 						<div className="wrapper">
-							<p>just eat</p>
+							<Link to="/"><p>just eat</p></Link>
 							<button
 								className="left"
 								onClick={() => {

@@ -8,6 +8,7 @@
         background-position-y:center;
         background-attachment: fixed;
         height: 40vh;
+        width: 100%;
         h2{
             color: white;
             font-size: 7rem;
@@ -15,12 +16,16 @@
         }
     }
 
-    .test {
+    .summaryBlurb {
         font-size: 2rem;
 
         a {
             text-decoration: underline;
         }
+    }
+
+    a.summaryLink {
+        display: inline;
     }
 
 
