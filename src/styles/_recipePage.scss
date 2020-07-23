@@ -15,20 +15,35 @@
 			text-shadow: 2px 4px 2px $secondary;
 		}
 	}
-
-	.featuredRecipe {
-		@include flex(row, space-between, center);
+	.titleCard {
+        background: $background;
+        margin-bottom: 20px;
+        padding:10px;
 		h2 {
+            font-size: 4rem;
+            margin:10px 0 0;
 			width: 100%;
 		}
+
+		.dietaryInfo {
+			text-align: center;
+			font-style: italic;
+			margin: 10px 0;
+			font-size: 1.6rem;
+		}
+	}
+	.featuredRecipe {
+		// @include flex(row, space-between, center);
 		img {
-			width: calc(40% - 10px);
+			width: 40%;
+			margin: 0 10px 0;
+			float: left;
 		}
 	}
 
 	.summaryBlurb {
 		font-size: 2rem;
-		width: calc(60% - 10px);
+		width: 100%;
 		align-self: flex-start;
 
 		a {
@@ -40,15 +55,55 @@
 		display: inline;
 	}
 
+	.cookingInfo {
+		@include flex(row, space-evenly, flex-start, wrap);
+		clear: both;
+		font-size: 1.6rem;
+	}
+
+	h3 {
+		text-align: center;
+		width: 100%;
+		margin-top: 20px;
+	}
+	.ingredients {
+		width: calc(50% - 15px);
+		margin-right: 15px;
+		@include flex(column, space-between, flex-start);
+		li {
+			@include flex(row, flex-start, center, nowrap);
+		}
+		img {
+			width: 70px;
+			max-height: 90px;
+			margin-right: 10px;
+		}
+	}
+
+	.instructions {
+		width: 50%;
+		ol {
+			margin-left: 15px;
+		}
+		li {
+			margin: 16px 0;
+			list-style-type: decimal;
+		}
+	}
+
 	.relatedRecipes {
 		ul {
 			@include flex(row, center, center);
 		}
 		li {
-			width: calc(30% -20px);
+			width: calc(30% - 20px);
 		}
 		img {
 			width: 100%;
 		}
+	}
+
+	.similarRecipes {
+		background: $background;
 	}
 }

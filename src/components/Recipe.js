@@ -108,7 +108,9 @@ class Recipe extends Component {
 		const result = relatedRecipesObj;
 		const relatedData = [];
 		result.data.forEach((item) => {
-			relatedData.push({ id: item.id, title: item.title, image: item.image, summary: item.summary });
+			// until i know all data needed, i'm just grabbing everything
+			// relatedData.push({ id: item.id, title: item.title, image: item.image, summary: item.summary });
+			relatedData.push(item);
 		});
 		this.setState({ relatedRecipes: relatedData }, () => {
 			console.log(this.state.relatedRecipes);
@@ -121,30 +123,72 @@ class Recipe extends Component {
 		return (
 			<div className="recipePage">
 				<header>
-					<h2>Let's get Cooking!</h2>
+					<h2>{recipe.title}</h2>
 				</header>
 				<main>
+					<div className="titleCard">
+						{/* <h2>{recipe.title}</h2> */}
+						{recipe.diets.length < 1 ? null : recipe.diets.length == 1 ? (
+							<p className="dietaryInfo">This meal is{recipe.diets[0]}. </p>
+						) : recipe.diets.length == 2 ? (
+							<p className="dietaryInfo">
+								This meal is {recipe.diets[0]}, and {recipe.diets[1]}.
+							</p>
+						) : (
+							<p className="dietaryInfo">
+								This meal is: {" "}
+								{recipe.diets.map((item, i) => {
+									if (i == recipe.diets.length - 2) {
+										return (item += ", and ");
+									} else if (i == recipe.diets.length - 1) {
+										return (item += ".");
+									} else return (item += ", ");
+								})}
+							</p>
+						)}
+					</div>
 					<div className="wrapper">
-						<section className="featuredRecipe">
-							<h2>{recipe.title}</h2>
+						<section className="featuredRecipe clearfix">
 							<img src={recipe.image} alt={recipe.title} />
-							<div className="summaryBlurb">
-								<p>
-									<span role="text" className="beforeLink"></span>
-									<Link
-										className="summaryLink"
-										to={`/recipe/${this.state.summaryLinkPath}`}
-										onClick={() => {
-											this.passRecipeInfo(this.state.summaryLinkPath);
-										}}
-									>
-										{this.state.summaryLinkName}
-									</Link>
-									<span role="text" className="afterLink"></span>
-								</p>
+							<p className="summaryBlurb">
+								<span role="text" className="beforeLink"></span>
+								<Link
+									className="summaryLink"
+									to={`/recipe/${this.state.summaryLinkPath}`}
+									onClick={() => {
+										this.passRecipeInfo(this.state.summaryLinkPath);
+									}}
+								>
+									{this.state.summaryLinkName}
+								</Link>
+								<span role="text" className="afterLink"></span>
+							</p>
+						</section>
+						<section className="cookingInfo">
+							<div className="ingredients">
+								<h3>Ingredients</h3>
+								<ul>
+									{recipe.extendedIngredients.map((item, i) => {
+										return (
+											<li key={item.id}>
+												<img src={`https://spoonacular.com/cdn/ingredients_100x100/${item.image}`} alt="" />
+												<p>{item.original}</p>
+											</li>
+										);
+									})}
+								</ul>
+							</div>
+							<div className="instructions">
+								<h3>Instructions</h3>
+								<ol>
+									{recipe.analyzedInstructions[0].steps.map((item) => {
+										return <li key={item.number}>{item.step}</li>;
+									})}
+								</ol>
 							</div>
 						</section>
 						<section className="relatedRecipes">
+							<h2 className="similarRecipes">Similar Recipes</h2>
 							<ul>
 								{this.state.relatedRecipes ? this.state.relatedRecipes.id : "1"}
 								{this.state.relatedRecipes.map((item, i) => {

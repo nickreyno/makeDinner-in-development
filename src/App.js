@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import MealGallery from "./components/MealGallery.js";
 import Recipe from "./components/Recipe.js";
 import resultObj from "./assets/resultObj.js";
+import Filters from "./components/Filters.js";
 // import resultExt from "./assets/resultExt.js"
 
 class App extends Component {
@@ -90,7 +91,10 @@ class App extends Component {
 				<Fragment>
 					<nav>
 						<div className="wrapper">
-							<Link to="/"><p>just eat</p></Link>
+							<Filters />
+							<Link to="/">
+								<p>just eat</p>
+							</Link>
 							<button
 								className="left"
 								onClick={() => {

@@ -1,3 +1,10 @@
 {
     "emmet.extensionsPath": "",
+    "cSpell.ignoreWords": [
+        "ketogenic",
+        "lacto",
+        "paleo",
+        "pescetarian",
+        "poutine"
+    ],
 }
