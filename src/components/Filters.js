@@ -91,31 +91,67 @@ class Filters extends Component {
 					],
 				},
 			],
+			showFilters: false,
+			showSubFilter: "",
 		};
-    }
-    
-    showFilter = ()=>{
+	}
 
-    }
+	showFilter = () => {
+		this.setState(
+			{
+				showFilters: !this.state.showFilters,
+			},
+			() => {
+				console.log(this.state.showFilters);
+			}
+		);
+	};
+	showSubFilter = (e) => {
+		const picked = e.target.children[0];
+		const navToClose = document.querySelector(".navFilterShow");
+		if ([...picked.classList].toString().includes("navFilterShow")) {
+			navToClose.classList.add("hidden");
+			navToClose.classList.remove("navFilterShow");
+		} else {
+			if (navToClose) {
+				navToClose.classList.add("hidden");
+				navToClose.classList.remove("navFilterShow");
+			}
+			console.log(picked.classList.toString());
+			picked.classList.add("navFilterShow");
+			picked.classList.remove("hidden");
+		}
+	};
+
 	render() {
 		return (
-			<div className="filterNav">
-				🍑
-				<ul>
-					{this.state.filters.map((filter, i) => {
-						return (
-							<li className={`filter ${filter.type}`}>
-								{filter.type}
-								<ul className="subFilters">
-									{filter.subFilters.map((subFilter, i) => {
-										return <li>{subFilter}</li>;
-									})}
-								</ul>
-							</li>
-						);
-					})}
-				</ul>
-			</div>
+			<Fragment>
+				<button className="filterNav" onClick={this.showFilter}>
+					🍑target
+				</button>
+				{this.state.showFilters ? (
+					<ul className="filterNav">
+						{this.state.filters.map((filter, i) => {
+							return (
+								<li
+									key={i}
+									className={`filter ${filter.type}`}
+									onClick={(e) => {
+										this.showSubFilter(e);
+									}}
+								>
+									{filter.type}
+									<ul className="subFilters hidden">
+										{this.state.filters[i].subFilters.map((subFilter, i) => {
+											return <li key={i}>{subFilter}</li>;
+										})}
+									</ul>
+								</li>
+							);
+						})}
+					</ul>
+				) : null}
+			</Fragment>
 		);
 	}
 }

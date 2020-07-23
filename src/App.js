@@ -120,7 +120,7 @@ class App extends Component {
 										this.getResultsLive(this.state.ingredient);
 									}}
 								>
-									<i className="fas fa-search"></i>
+									{/* <i className="fas fa-search"></i> */}
 								</button>
 							</form>
 							<form action="submit">

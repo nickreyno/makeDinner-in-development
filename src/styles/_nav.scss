@@ -33,7 +33,18 @@ nav {
 }
 
 .filterNav {
+	.filter {
+		font-size: 2rem;
+	}
 	.subFilters {
+		font-size: 1.2rem;
+	}
+
+	.hidden {
 		display: none;
 	}
+	.navFilterShow {
+		display: block;
+	}
+
 }
