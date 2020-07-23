@@ -33,32 +33,60 @@ nav {
 }
 .filterNavButton {
 	position: relative;
+	width: 140px;
 }
+
 .filterNav {
 	position: absolute;
 	top: calc(100% + 5px);
-	left:0;
+	left: 5px;
 	padding: 5px;
-	border-radius: 0 0 5px 5px;
+	border-radius: 0 0 0px 5px;
 	background: $accent1;
 	.filter {
 		font-size: 2rem;
-		margin:5px;
+		margin: 10px;
 	}
 	.subFilters {
-		@include flex(row, center, center, wrap);
-		max-height: 100%;
-		background:lighten($accent1, 10);
+		padding: 10px 0;
+		@include flex(column, flex-start, flex-start, wrap);
+		align-content: center;
+		height: 100%;
+		background: lighten($accent1, 5);
+		border-radius: 0 0 5px 0;
 		position: absolute;
-		left:100%;
-		top:0;
+		left: 100%;
+		top: 0;
 		font-size: 1.2rem;
+		li {
+			// margin: 3px 0 3px 10px;
+			margin: 3px 5px 3px 10px;
+			line-height: 1;
+			// width: 80px;
+			width: auto;
+			display: inline-block;
+		}
+		&.type {
+			width: 170px;
+		}
+		&.cuisine {
+			width: 380px;
+		}
+		&.diet {
+			width: 120px;
+			li {
+				margin: 2px 10px;
+			}
+		}
+		&.intolerances {
+			width: 130px;
+		}
 	}
 
 	.hidden {
 		display: none;
 	}
 	.navFilterShow {
-		display: block;
+		display: flex;
 	}
 }

@@ -192,8 +192,8 @@ class Recipe extends Component {
 						</section>
 					</div>
 					<section className="relatedRecipes">
-						<h2 className="relatedRecipesTitle">Try Similar Recipes</h2>
 						<div className="wrapper">
+						<h2 className="relatedRecipesTitle">Try Similar Recipes</h2>
 							<ul>
 								{this.state.relatedRecipes ? this.state.relatedRecipes.id : "1"}
 								{this.state.relatedRecipes.map((item, i) => {
@@ -214,6 +214,12 @@ class Recipe extends Component {
 							</ul>
 						</div>
 					</section>
+					<div className="randomRecipe">
+						<h2>Try Something New</h2>
+					</div>
+					<div className="dessertRecipe">
+						<h2>Skip to Dessert</h2>
+					</div>
 				</main>
 			</div>
 		);

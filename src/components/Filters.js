@@ -61,16 +61,16 @@ class Filters extends Component {
 				{
 					type: "diet",
 					subFilters: [
-						"Gluten Free",
-						"Ketogenic",
 						"Vegetarian",
 						"Lacto-Vegetarian",
 						"Ovo-Vegetarian",
-						"Vegan",
 						"Pescetarian",
+						"Gluten Free",
+						"Vegan",
+						"Ketogenic",
 						"Paleo",
-						"Primal",
-						"Whole30",
+						// "Primal",
+						// "Whole30",
 					],
 				},
 				{
@@ -127,7 +127,7 @@ class Filters extends Component {
 		return (
 			<Fragment>
 				<button className="filterNavButton" onClick={this.showFilter}>
-					🍑target
+					🍑browse
 				</button>
 				{this.state.showFilters ? (
 					<ul className="filterNav">
@@ -141,7 +141,7 @@ class Filters extends Component {
 									}}
 								>
 									{filter.type}
-									<ul className="subFilters hidden">
+									<ul className={`subFilters ${filter.type} hidden`}>
 										{this.state.filters[i].subFilters.map((subFilter, i) => {
 											return <li key={i}>{subFilter}</li>;
 										})}

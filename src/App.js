@@ -38,7 +38,7 @@ class App extends Component {
 				analyzedInstructions: item.analyzedInstructions,
 			});
 		});
-		console.log(shorter)
+		console.log(shorter);
 	};
 
 	updateIngredient = (e) => {
@@ -62,18 +62,19 @@ class App extends Component {
 		chosenWord = "main course";
 		console.log("working");
 		axios({
-			// url: `https://api.spoonacular.com/recipes/complexSearch`,
-			url: `https://api.spoonacular.com/recipes/130933/information`,
+			url: `https://api.spoonacular.com/recipes/complexSearch`,
+			// url: `https://api.spoonacular.com/recipes/130933/information`,
 			method: "GET",
 			// responseType: 'json',
 			params: {
 				apiKey: "cd74bd0589054098a2161681f58192c0",
+				query: chosenWord,
 				// ids: "723984,584549,667917,482574,551452,537208,",
 				// includeNutrition: false,
 				// type: chosenWord,
-				// instructionsRequired: true,
-				// addRecipeInformation: true,
-				// fillIngredients: true,
+				instructionsRequired: true,
+				addRecipeInformation: true,
+				fillIngredients: true,
 				// number: 17,
 			},
 		})
@@ -151,8 +152,8 @@ class App extends Component {
 							<h1>What's for Dinner?</h1>
 						</header>
 						<main>
+							<h2> Browse our favs of search for your own! </h2>
 							<div className="wrapper">
-								<h2> Some of our Favourites </h2>
 								<ul className="homePageRecipes">
 									<li className="feature">
 										<Link
@@ -167,7 +168,7 @@ class App extends Component {
 												<ul>
 													<li> ready in: {results[5].readyInMinutes} minutes</li>
 													<li> serves: {results[5].servings}</li>
-													<li>{results[5].summary.split(".")[5]}</li>
+													<li>{results[5].summary.split(".")[0]}</li>
 												</ul>
 											</div>
 										</Link>

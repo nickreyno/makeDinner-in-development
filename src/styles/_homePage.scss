@@ -2,9 +2,11 @@ h2 {
 	font-size: 3rem;
 	color: $accent2;
 	text-align: center;
-	margin: 20px auto;
+	margin: 0 auto 20px;
 	width: 100%;
 	display: inline-block;
+	background: $background;
+	padding: 20px 0;
 }
 
 .homePageRecipes {
@@ -12,13 +14,17 @@ h2 {
 	flex-wrap: wrap;
 
 	.feature {
-		width: 100%;
-		margin: 10px;
 		a {
-			@include flex(row, space-between);
+			@include flex(row, space-between, stretch, nowrap);
+			width: 100%;
+			margin: 10px;
 		}
-		img {
+		img,
+		.featureBlurb {
 			width: calc(50% - 10px);
+		}
+		h3 {
+			font-size: 4rem;
 		}
 	}
 
@@ -33,7 +39,7 @@ h2 {
 }
 
 footer {
-	margin-top:15vh;
+	// margin-top:15vh;
 	width: 100%;
 	background: $accent1;
 }
