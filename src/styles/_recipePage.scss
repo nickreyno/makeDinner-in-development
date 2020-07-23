@@ -1,39 +1,54 @@
-.recipePage{
-    header {
-        @include flex(column);
-        position: relative;
-        margin-top: 41px;
-        background: url(../assets/recipeHeader.jpg);
-        background-size: cover;
-        background-position-y:center;
-        background-attachment: fixed;
-        height: 40vh;
-        width: 100%;
-        h2{
-            color: white;
-            font-size: 7rem;
-            text-shadow: 2px 4px 2px $secondary;
-        }
-    }
+.recipePage {
+	header {
+		@include flex(column);
+		position: relative;
+		margin-top: 41px;
+		background: url(../assets/recipeHeader.jpg);
+		background-size: cover;
+		background-position-y: center;
+		background-attachment: fixed;
+		height: 40vh;
+		width: 100%;
+		h2 {
+			color: white;
+			font-size: 7rem;
+			text-shadow: 2px 4px 2px $secondary;
+		}
+	}
 
-    .summaryBlurb {
-        font-size: 2rem;
+	.featuredRecipe {
+		@include flex(row, space-between, center);
+		h2 {
+			width: 100%;
+		}
+		img {
+			width: calc(40% - 10px);
+		}
+	}
 
-        a {
-            text-decoration: underline;
-        }
-    }
+	.summaryBlurb {
+		font-size: 2rem;
+		width: calc(60% - 10px);
+		align-self: flex-start;
 
-    a.summaryLink {
-        display: inline;
-    }
+		a {
+			text-decoration: underline;
+		}
+	}
 
+	a.summaryLink {
+		display: inline;
+	}
 
-
-
-
-
-
-
-
+	.relatedRecipes {
+		ul {
+			@include flex(row, center, center);
+		}
+		li {
+			width: calc(30% -20px);
+		}
+		img {
+			width: 100%;
+		}
+	}
 }
