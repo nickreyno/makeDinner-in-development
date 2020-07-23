@@ -3,9 +3,9 @@ nav {
 	background: white;
 	box-shadow: 0 0 4px black;
 	padding: 5px;
-    position: fixed;
-    top:0;
-    left:0;
+	position: fixed;
+	top: 0;
+	left: 0;
 	z-index: 2;
 
 	.wrapper {
@@ -31,12 +31,27 @@ nav {
 		justify-self: flex-end;
 	}
 }
-
+.filterNavButton {
+	position: relative;
+}
 .filterNav {
+	position: absolute;
+	top: calc(100% + 5px);
+	left:0;
+	padding: 5px;
+	border-radius: 0 0 5px 5px;
+	background: $accent1;
 	.filter {
 		font-size: 2rem;
+		margin:5px;
 	}
 	.subFilters {
+		@include flex(row, center, center, wrap);
+		max-height: 100%;
+		background:lighten($accent1, 10);
+		position: absolute;
+		left:100%;
+		top:0;
 		font-size: 1.2rem;
 	}
 
@@ -46,5 +61,4 @@ nav {
 	.navFilterShow {
 		display: block;
 	}
-
 }

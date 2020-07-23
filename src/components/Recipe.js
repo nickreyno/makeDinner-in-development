@@ -23,9 +23,12 @@ class Recipe extends Component {
 
 	componentDidMount() {
 		console.log("props", this.props);
+		this.scrollToTop();
 		this.manipulateSummary();
 	}
-
+	scrollToTop = () => {
+		window.scrollTo(0, 0);
+	};
 	// this function manipulates the summary key adds semantic meaning as well as formatting to enable router-dom to mesh with this html
 	manipulateSummary = () => {
 		let summary = this.props.recipe.summary;
@@ -123,7 +126,7 @@ class Recipe extends Component {
 		return (
 			<div className="recipePage">
 				<header>
-					<h2>{recipe.title}</h2>
+					<h1>{recipe.title}</h1>
 				</header>
 				<main>
 					<div className="titleCard">
@@ -136,7 +139,7 @@ class Recipe extends Component {
 							</p>
 						) : (
 							<p className="dietaryInfo">
-								This meal is: {" "}
+								This meal is:{" "}
 								{recipe.diets.map((item, i) => {
 									if (i == recipe.diets.length - 2) {
 										return (item += ", and ");
@@ -187,23 +190,30 @@ class Recipe extends Component {
 								</ol>
 							</div>
 						</section>
-						<section className="relatedRecipes">
-							<h2 className="similarRecipes">Similar Recipes</h2>
+					</div>
+					<section className="relatedRecipes">
+						<h2 className="relatedRecipesTitle">Try Similar Recipes</h2>
+						<div className="wrapper">
 							<ul>
 								{this.state.relatedRecipes ? this.state.relatedRecipes.id : "1"}
 								{this.state.relatedRecipes.map((item, i) => {
-									if (i != 0) {
+									// if (i != 0) {
 										return (
 											<li key={item.id}>
 												<img src={item.image} alt={item.title} />
 												<h3>{item.title}</h3>
+                                                <p>{item.summary.split(".")[0].replace("<b>","").replace("</b>","")}.</p>
+                                                <p><strong>Diets: </strong>{item.diets.join(", ")}</p>
+												<p>
+													<strong>Ready in: </strong>{item.readyInMinutes} minutes, serves {item.servings}
+												</p>
 											</li>
 										);
-									}
+									// }
 								})}
 							</ul>
-						</section>
-					</div>
+						</div>
+					</section>
 				</main>
 			</div>
 		);

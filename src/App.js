@@ -23,7 +23,24 @@ class App extends Component {
 
 	componentDidMount() {
 		this.getResultsDev("chicken");
+		this.shorten();
 	}
+	shorten = () => {
+		const shorter = [];
+		this.state.resultObj.map((item, i) => {
+			shorter.push({
+				id: item.id,
+				summary: item.summary,
+				diets: item.diets,
+				title: item.title,
+				image: item.image,
+				extendedIngredients: item.extendedIngredients,
+				analyzedInstructions: item.analyzedInstructions,
+			});
+		});
+		console.log(shorter)
+	};
+
 	updateIngredient = (e) => {
 		this.setState({
 			ingredient: e.target.value,

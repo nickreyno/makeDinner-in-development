@@ -9,27 +9,22 @@
 		background-attachment: fixed;
 		height: 40vh;
 		width: 100%;
-		h2 {
+		h1 {
 			color: white;
 			font-size: 7rem;
 			text-shadow: 2px 4px 2px $secondary;
 		}
 	}
 	.titleCard {
-        background: $background;
-        margin-bottom: 20px;
-        padding:10px;
-		h2 {
-            font-size: 4rem;
-            margin:10px 0 0;
-			width: 100%;
-		}
-
+		background: $background;
+		margin-bottom: 10vh;
+        padding: 10px;
+        
 		.dietaryInfo {
-			text-align: center;
+            text-align: center;
 			font-style: italic;
 			margin: 10px 0;
-			font-size: 1.6rem;
+            font-size: 2rem;
 		}
 	}
 	.featuredRecipe {
@@ -92,18 +87,42 @@
 	}
 
 	.relatedRecipes {
+		&Title {
+			background: $background;
+			padding: 20px;
+		}
+		h2 {
+            font-size: 4rem;
+            font-weight: normal;
+		}
 		ul {
-			@include flex(row, center, center);
+			@include flex(row, space-between, center);
 		}
 		li {
-			width: calc(30% - 20px);
+            // width: calc(25% - 10px);
+            width: calc(50% - 40px);
+			margin: 5px 0 40px;
+			background: $background;
+			align-self: stretch;
+			border: 4px solid $background;
+			// border-radius: 5px;
 		}
 		img {
+			// border-radius: 4px 4px 0 0;
 			width: 100%;
 		}
-	}
-
-	.similarRecipes {
-		background: $background;
+		h3 {
+			font-size: 2rem;
+			margin: 20px 10px 10px;
+            text-align: center;
+            width: calc(100% - 20px);
+		}
+		p {
+			text-align: center;
+			font-size: 1.4rem;
+			margin-bottom: 10px;
+            padding: 0 10px;
+            width: auto;
+		}
 	}
 }

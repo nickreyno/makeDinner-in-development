@@ -126,7 +126,7 @@ class Filters extends Component {
 	render() {
 		return (
 			<Fragment>
-				<button className="filterNav" onClick={this.showFilter}>
+				<button className="filterNavButton" onClick={this.showFilter}>
 					🍑target
 				</button>
 				{this.state.showFilters ? (
