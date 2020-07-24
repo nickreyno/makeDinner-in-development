@@ -20,6 +20,7 @@ class App extends Component {
 			// resultObj: {},
 			recipeClicked: resultObj[0],
 			// resultExt: resultExt,
+			apiKey: ['cd74bd0589054098a2161681f58192c0', 'a8e92198263545bcb214ec6e78a03c7f','03807c83cc6546a980c784079a8c2fd8','ffbaefcb24f942e3b26825d47ad292b0','0d411c50c97a49d5a155391721a6abea','e429c44d3e5e48beacacf5b14cc993a2']
 		};
 	}
 
@@ -72,7 +73,7 @@ class App extends Component {
 			method: "GET",
 			// responseType: 'json',
 			params: {
-				apiKey: "cd74bd0589054098a2161681f58192c0",
+				apiKey: this.state.apiKey[0],
 				query: chosenWord,
 				// ids: "723984,584549,667917,482574,551452,537208,",
 				// includeNutrition: false,
@@ -100,7 +101,18 @@ class App extends Component {
 			})
 			.catch((err) => {
 				console.log(err.response.status);
+				if (err.response.status != 402){
+					console.log('figure')
+				}
 				// if 402 error, switch API key
+				if (err.response.status == 402) {
+					const keys = [...this.state.apiKey];
+					keys.shift();
+					console.log(keys)
+					this.setState({
+						apiKey: keys
+					},()=>{this.getResultsLive(chosenWord)})
+				}
 			});
 	};
 	passRecipeInfo = (recipe) => {

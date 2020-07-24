@@ -1,37 +1,55 @@
 import React, { Component, Fragment } from "react";
 import { Route, Link } from "react-router-dom";
 import axios from "axios";
-import relatedRecipesObj from "./relatedRecipesDev.js";
+// import relatedRecipesObj from "./relatedRecipesDev.js";
 
 class Recipe extends Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			recipeClicked: "",
+			recipe: this.props.recipe,
+			recipeClicked: [],
 			summaryLinkName: "",
 			relatedIDs: "",
 			relatedRecipes: [],
+			apiKey: [
+				"cd74bd0589054098a2161681f58192c0",
+				"a8e92198263545bcb214ec6e78a03c7f",
+				"03807c83cc6546a980c784079a8c2fd8",
+				"ffbaefcb24f942e3b26825d47ad292b0",
+				"0d411c50c97a49d5a155391721a6abea",
+				"e429c44d3e5e48beacacf5b14cc993a2",
+			],
 		};
 	}
-	// used to generate new recipe page for link clicked
-	passRecipeInfo = (recipe) => {
-		this.setState({
-			recipeClicked: recipe,
-		});
-	};
-
 	componentDidMount() {
 		console.log("props", this.props);
+		console.log("related", this.state.relatedRecipes);
 		this.scrollToTop();
 		this.manipulateSummary();
 	}
+
+	// used to generate new recipe page for link clicked
+	updateRecipePage = (recipe) => {
+		this.setState(
+			{
+				recipe: recipe,
+				relatedRecipes: [],
+			},
+			() => {
+				console.log("second round", this.state.recipe);
+				this.manipulateSummary();
+			}
+		);
+	};
+
 	scrollToTop = () => {
 		window.scrollTo(0, 0);
 	};
 	// this function manipulates the summary key adds semantic meaning as well as formatting to enable router-dom to mesh with this html
 	manipulateSummary = () => {
-		let summary = this.props.recipe.summary;
+		let summary = this.state.recipe.summary;
 		// populate with api's html markup to target and manipulate it
 		const summaryBlurb = document.getElementsByClassName("beforeLink");
 		summaryBlurb[0].innerHTML = summary;
@@ -42,25 +60,29 @@ class Recipe extends Component {
 				relatedIDs: summaryID[summaryID.length - 1],
 			},
 			() => {
-				this.relatedRecipes("props", "recipe");
+				this.relatedRecipes();
+				// gets rid of non-semantic b tag
+				// rips data from broken spoonacular tag and manipulates it to populate a router-dom-link below
+				let summaryMod = summary.replace(/b>/g, "strong>").split(/<a(.*?)>/);
+				// const summaryAfterLink = summary.split("</a>")[1].split(" All things considered");
+				this.setState({
+					summaryLinkName: summaryMod[2].split("</a>")[0],
+					summaryLinkPath: summaryID[summaryID.length - 1],
+				});
+				console.log(summaryMod);
+				summaryMod = summaryMod[0].split("spoonacular")[0].split(".");
+				summaryMod.pop();
+				summaryMod = summaryMod.join(". ") + ". If you enjoy this recipe, you should try ";
+				// update the page's html with the correct info
+				document.querySelector(".beforeLink").innerHTML = summaryMod;
+				// document.querySelector(".afterLink").innerHTML = summaryAfterLink[0];
 			}
 		);
-		// gets rid of non-semantic b tag
-		// rips data from broken spoonacular tag and manipulates it to populate a router-dom-link below
-		const summaryBeforeLink = summary.replace(/b>/g, "strong>").split(/<a(.*?)>/);
-		const summaryAfterLink = summary.split("</a>")[1].split(" All things considered");
-		this.setState({
-			summaryLinkName: summaryBeforeLink[2].split("</a>")[0],
-			summaryLinkPath: summaryID[summaryID.length - 1],
-		});
-		// update the page's html with the correct info
-		document.querySelector(".beforeLink").innerHTML = summaryBeforeLink[0];
-		document.querySelector(".afterLink").innerHTML = summaryAfterLink[0];
 	};
 
 	// extracts recipe id's from the featured recipe's summary key for the related recipes section
-	relatedRecipes = (propOrState, key) => {
-		let summary = this[propOrState][key].summary.split("<a");
+	relatedRecipes = () => {
+		let summary = this.state.recipe.summary.split("<a");
 		const id = [];
 		summary.map((item, i) => {
 			if (i != 0 && i != 1) {
@@ -77,7 +99,8 @@ class Recipe extends Component {
 			},
 			() => {
 				console.log(this.state.relatedIDs);
-				this.relatedRecipesCallDev(this.state.relatedIDs);
+				this.relatedRecipesCall(this.state.relatedIDs);
+				// this.relatedRecipesCallDev(this.state.relatedIDs);
 			}
 		);
 	};
@@ -88,9 +111,9 @@ class Recipe extends Component {
 			url: `https://api.spoonacular.com/recipes/informationBulk`,
 			method: "GET",
 			params: {
-				apiKey: "cd74bd0589054098a2161681f58192c0",
+				apiKey: this.state.apiKey[0],
 				ids: ids,
-				includeNutrition: false,
+				instructionsRequired: true,
 				addRecipeInformation: true,
 				fillIngredients: true,
 			},
@@ -99,29 +122,58 @@ class Recipe extends Component {
 			.then((result) => {
 				console.log("hey this is my .related recipes");
 				console.log(result);
+				const resultMod = [];
+				// api doesn't properly filter for instructions so I double check and filter out.
+				result.data.forEach((result) => {
+					if (result.instructions != null) {
+						resultMod.push(result);
+					}
+				});
+
+				this.setState({ relatedRecipes: resultMod }, () => {
+					console.log(this.state.relatedRecipes);
+				});
 			})
 			.catch((err) => {
 				console.log(err.response.status);
 				// if 402 error, switch API key
+				console.log(err.response.status);
+				if (err.response.status != 402) {
+					console.log("figure");
+				}
+				// if 402 error, switch API key
+				if (err.response.status == 402) {
+					const keys = [...this.state.apiKey];
+					keys.shift();
+					console.log(keys);
+					this.setState(
+						{
+							apiKey: keys,
+						},
+						() => {
+							this.relatedRecipesCall(ids);
+						}
+					);
+				}
 			});
 	};
 
 	// for dev work to conserve API rate limit
-	relatedRecipesCallDev = (ids) => {
-		const result = relatedRecipesObj;
-		const relatedData = [];
-		result.data.forEach((item) => {
-			// until i know all data needed, i'm just grabbing everything
-			// relatedData.push({ id: item.id, title: item.title, image: item.image, summary: item.summary });
-			relatedData.push(item);
-		});
-		this.setState({ relatedRecipes: relatedData }, () => {
-			console.log(this.state.relatedRecipes);
-		});
-	};
+	// relatedRecipesCallDev = (ids) => {
+	// 	const result = relatedRecipesObj;
+	// 	const relatedData = [];
+	// 	result.data.forEach((item) => {
+	// 		// until i know all data needed, i'm just grabbing everything
+	// 		// relatedData.push({ id: item.id, title: item.title, image: item.image, summary: item.summary });
+	// 		relatedData.push(item);
+	// 	});
+	// 	this.setState({ relatedRecipes: relatedData }, () => {
+	// 		console.log(this.state.relatedRecipes);
+	// 	});
+	// };
 
 	render() {
-		const { recipe } = this.props;
+		const { recipe } = this.state;
 		// const { relatedRecipes } = this.state;
 		return (
 			<div className="recipePage">
@@ -155,16 +207,18 @@ class Recipe extends Component {
 							<img src={recipe.image} alt={recipe.title} />
 							<p className="summaryBlurb">
 								<span role="text" className="beforeLink"></span>
-								<Link
-									className="summaryLink"
-									to={`/recipe/${this.state.summaryLinkPath}`}
-									onClick={() => {
-										this.passRecipeInfo(this.state.summaryLinkPath);
-									}}
-								>
-									{this.state.summaryLinkName}
-								</Link>
-								<span role="text" className="afterLink"></span>
+								{this.state.relatedRecipes.length > 0 ? (
+									<Link
+										className="summaryLink"
+										to={`/recipe/${this.state.relatedRecipes[0].id}`}
+										onClick={() => {
+											this.updateRecipePage(this.state.relatedRecipes[0]);
+										}}
+									>
+										{this.state.relatedRecipes[0].title}
+									</Link>
+								) : null}
+								. Happy Cooking!
 							</p>
 						</section>
 						<section className="cookingInfo">
@@ -193,22 +247,26 @@ class Recipe extends Component {
 					</div>
 					<section className="relatedRecipes">
 						<div className="wrapper">
-						<h2 className="relatedRecipesTitle">Try Similar Recipes</h2>
+							<h2 className="relatedRecipesTitle">Try Similar Recipes</h2>
 							<ul>
-								{this.state.relatedRecipes ? this.state.relatedRecipes.id : "1"}
+								{this.state.relatedRecipes.length > 0 ? this.state.relatedRecipes.id : "1"}
 								{this.state.relatedRecipes.map((item, i) => {
 									// if (i != 0) {
-										return (
-											<li key={item.id}>
-												<img src={item.image} alt={item.title} />
-												<h3>{item.title}</h3>
-                                                <p>{item.summary.split(".")[0].replace("<b>","").replace("</b>","")}.</p>
-                                                <p><strong>Diets: </strong>{item.diets.join(", ")}</p>
-												<p>
-													<strong>Ready in: </strong>{item.readyInMinutes} minutes, serves {item.servings}
-												</p>
-											</li>
-										);
+									return (
+										<li key={item.id}>
+											<img src={item.image} alt={item.title} />
+											<h3>{item.title}</h3>
+											<p>{item.summary.split(".")[0].replace("<b>", "").replace("</b>", "")}.</p>
+											<p>
+												<strong>Diets: </strong>
+												{item.diets.join(", ")}
+											</p>
+											<p>
+												<strong>Ready in: </strong>
+												{item.readyInMinutes} minutes, serves {item.servings}
+											</p>
+										</li>
+									);
 									// }
 								})}
 							</ul>
