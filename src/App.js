@@ -3,7 +3,8 @@ import axios from "axios";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import MealGallery from "./components/MealGallery.js";
 import Recipe from "./components/Recipe.js";
-import resultObj from "./assets/resultObj.js";
+// import resultObj from "./assets/resultObj.js";
+import resultObj from "./assets/resultObjNew.js"
 import Filters from "./components/Filters.js";
 // import resultExt from "./assets/resultExt.js"
 
@@ -16,13 +17,14 @@ class App extends Component {
 			ingredient: "",
 			meals: [],
 			resultObj: resultObj,
+			// resultObj: {},
 			recipeClicked: resultObj[0],
 			// resultExt: resultExt,
 		};
 	}
 
 	componentDidMount() {
-		this.getResultsDev("chicken");
+		// this.getResultsDev("chicken");
 		this.shorten();
 	}
 	shorten = () => {
@@ -36,8 +38,11 @@ class App extends Component {
 				image: item.image,
 				extendedIngredients: item.extendedIngredients,
 				analyzedInstructions: item.analyzedInstructions,
+				readyInMinutes: item.readyInMinutes,
+				servings: item.servings,
+				spoonacularScore: item.spoonacularScore
 			});
-		});
+		})
 		console.log(shorter);
 	};
 
@@ -59,7 +64,7 @@ class App extends Component {
 	};
 
 	getResultsLive = (chosenWord) => {
-		chosenWord = "main course";
+		// chosenWord = "main course";
 		console.log("working");
 		axios({
 			url: `https://api.spoonacular.com/recipes/complexSearch`,
@@ -75,21 +80,23 @@ class App extends Component {
 				instructionsRequired: true,
 				addRecipeInformation: true,
 				fillIngredients: true,
-				// number: 17,
+				number: 10,
+				sort: "popularity",
+				sortDirection:"desc"
 			},
 		})
 			// to make sure if the word has definition
 			.then((result) => {
 				console.log("hey this is my .then");
-				console.log(result);
-				// this.setState(
-				// 	{
-				// 		meals: result.meals,
-				// 	},
-				// 	() => {
-				// 		console.log(this.state.meals[0]);
-				// 	}
-				// );
+				this.setState(
+					{
+						// meals: result.meals,
+						resultObj: result.data.results
+					},
+					() => {
+						console.log(this.state.resultObj);
+					}
+				);
 			})
 			.catch((err) => {
 				console.log(err.response.status);
@@ -154,27 +161,28 @@ class App extends Component {
 						<main>
 							<h2> Browse our favs of search for your own! </h2>
 							<div className="wrapper">
+								{this.state.resultObj.length > 0 ? (
 								<ul className="homePageRecipes">
 									<li className="feature">
 										<Link
-											to={`/recipe/${results[5].id}`}
+											to={`/recipe/${results[0].id}`}
 											onClick={() => {
-												this.passRecipeInfo(results[5]);
+												this.passRecipeInfo(results[0]);
 											}}
 										>
-											<img src={results[5].image} alt="food" />
+											<img src={results[0].image} alt="food" />
 											<div className="featureBlurb">
-												<h3>{results[5].title}</h3>
+												<h3>{results[0].title}</h3>
 												<ul>
-													<li> ready in: {results[5].readyInMinutes} minutes</li>
-													<li> serves: {results[5].servings}</li>
-													<li>{results[5].summary.split(".")[0]}</li>
+													<li> ready in: {results[0].readyInMinutes} minutes</li>
+													<li> serves: {results[0].servings}</li>
+													<li>{results[0].summary.split(".")[0]}</li>
 												</ul>
 											</div>
 										</Link>
 									</li>
 									{results.map((entry, i) => {
-										if (i != 5) {
+										if (i != 0) {
 											return (
 												<li key={entry.id} className="support">
 													<Link
@@ -196,6 +204,7 @@ class App extends Component {
 										}
 									})}
 								</ul>
+								):null}
 							</div>
 						</main>
 					</Route>
