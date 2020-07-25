@@ -96,6 +96,33 @@ class Filters extends Component {
 		};
 	}
 
+	componentDidMount() {
+		this.closeFilter();
+	}
+
+	// when user clicks something other than the filter nav, this will check to see if the user clicked a subnav, otherwise it will close the nav.
+	closeFilter = () => {
+		const filterNavButton = document.querySelector(".filterNavButton");
+		document.addEventListener("click", (e) => {
+			if (e.target != filterNavButton) {
+				let check = false;
+				const mainFilters = document.getElementsByClassName("filter");
+				if (mainFilters) {
+					for (let i = 0; i < mainFilters.length; i++) {
+						if (e.target == document.querySelector(".filterNav") || e.target == mainFilters[i]) {
+							check = true;
+						}
+					}
+					if (!check) {
+						this.setState({
+							showFilters: false,
+						});
+					}
+				}
+			}
+		});
+	};
+
 	showFilter = () => {
 		this.setState(
 			{
@@ -107,19 +134,22 @@ class Filters extends Component {
 		);
 	};
 	showSubFilter = (e) => {
+		this.setState({ showFilters: true });
 		const picked = e.target.children[0];
 		const navToClose = document.querySelector(".navFilterShow");
-		if ([...picked.classList].toString().includes("navFilterShow")) {
-			navToClose.classList.add("hidden");
-			navToClose.classList.remove("navFilterShow");
-		} else {
-			if (navToClose) {
+		if (picked) {
+			if ([...picked.classList].toString().includes("navFilterShow")) {
 				navToClose.classList.add("hidden");
 				navToClose.classList.remove("navFilterShow");
+			} else {
+				if (navToClose) {
+					navToClose.classList.add("hidden");
+					navToClose.classList.remove("navFilterShow");
+				}
+				console.log(picked.classList.toString());
+				picked.classList.add("navFilterShow");
+				picked.classList.remove("hidden");
 			}
-			console.log(picked.classList.toString());
-			picked.classList.add("navFilterShow");
-			picked.classList.remove("hidden");
 		}
 	};
 
@@ -129,8 +159,9 @@ class Filters extends Component {
 				<button className="filterNavButton" onClick={this.showFilter}>
 					🍑browse
 				</button>
+
 				{this.state.showFilters ? (
-					<ul className="filterNav">
+					<ul className="filterNav show">
 						{this.state.filters.map((filter, i) => {
 							return (
 								<li
@@ -143,7 +174,11 @@ class Filters extends Component {
 									{filter.type}
 									<ul className={`subFilters ${filter.type} hidden`}>
 										{this.state.filters[i].subFilters.map((subFilter, i) => {
-											return <li key={i}>{subFilter}</li>;
+											return (
+												<li key={i}>
+													<Link to={`/browse/${filter.type}/${subFilter}`} onClick={()=>{this.props.linksToParent(filter.type,subFilter)}}>{subFilter}</Link>
+												</li>
+											);
 										})}
 									</ul>
 								</li>
