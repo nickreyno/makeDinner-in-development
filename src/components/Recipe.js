@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Route, Link } from "react-router-dom";
 import axios from "axios";
-// import relatedRecipesObj from "./relatedRecipesDev.js";
+import relatedRecipesObj from "./relatedRecipesDev.js";
 
 class Recipe extends Component {
 	constructor(props) {
@@ -99,8 +99,8 @@ class Recipe extends Component {
 			},
 			() => {
 				console.log(this.state.relatedIDs);
-				this.relatedRecipesCall(this.state.relatedIDs);
-				// this.relatedRecipesCallDev(this.state.relatedIDs);
+				// this.relatedRecipesCall(this.state.relatedIDs);
+				this.relatedRecipesCallDev(this.state.relatedIDs);
 			}
 		);
 	};
@@ -162,18 +162,18 @@ class Recipe extends Component {
 	};
 
 	// for dev work to conserve API rate limit
-	// relatedRecipesCallDev = (ids) => {
-	// 	const result = relatedRecipesObj;
-	// 	const relatedData = [];
-	// 	result.data.forEach((item) => {
-	// 		// until i know all data needed, i'm just grabbing everything
-	// 		// relatedData.push({ id: item.id, title: item.title, image: item.image, summary: item.summary });
-	// 		relatedData.push(item);
-	// 	});
-	// 	this.setState({ relatedRecipes: relatedData }, () => {
-	// 		console.log(this.state.relatedRecipes);
-	// 	});
-	// };
+	relatedRecipesCallDev = (ids) => {
+		const result = relatedRecipesObj;
+		const relatedData = [];
+		result.data.forEach((item) => {
+			// until i know all data needed, i'm just grabbing everything
+			// relatedData.push({ id: item.id, title: item.title, image: item.image, summary: item.summary });
+			relatedData.push(item);
+		});
+		this.setState({ relatedRecipes: relatedData }, () => {
+			console.log(this.state.relatedRecipes);
+		});
+	};
 
 	render() {
 		const { recipe } = this.state;
@@ -207,6 +207,8 @@ class Recipe extends Component {
 					</div>
 					<div className="wrapper">
 						<section className="featuredRecipe clearfix">
+							<p>Ready In: {recipe.readyInMinutes}</p>
+							<p>Serves: {recipe.servings}</p>
 							<img src={recipe.image} alt={recipe.title} />
 							<p className="summaryBlurb">
 								<span role="text" className="beforeLink"></span>

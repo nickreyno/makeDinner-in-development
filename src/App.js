@@ -166,7 +166,7 @@ class App extends Component {
 							<h1>What's for Dinner?</h1>
 						</header>
 						<main>
-							<h2> Browse our favs of search for your own! </h2>
+							<h2> Browse our favs or search for your own! </h2>
 							<div className="wrapper">
 								{this.state.resultObj.length > 0 ? (
 									<ul className="homePageRecipes">
