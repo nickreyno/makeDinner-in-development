@@ -239,6 +239,7 @@ class App extends Component {
 								<li>
 									<Link to="/our_work">Our Work</Link>
 								</li>
+								<li>Checklist by Qomariyah from the Noun Project</li>
 							</ul>
 						</div>
 					</footer>

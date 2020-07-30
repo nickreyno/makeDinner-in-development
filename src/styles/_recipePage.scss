@@ -17,7 +17,6 @@
 	}
 	.titleCard {
 		background: $background;
-		margin-bottom: 10vh;
 		padding: 10px;
 
 		.dietaryInfo {
@@ -28,7 +27,15 @@
 		}
 	}
 	.featuredRecipe {
+		background: $primary;
+		padding: 10vh 0;
+	}
+	.recipeContainer {
 		// @include flex(row, space-between, center);
+		background: $white;
+		padding: 40px 20px;
+		border-radius: 10px;
+		box-shadow: 0 0 5px 2px $secondary;
 		img {
 			width: 40%;
 			margin: 0 10px 0;
@@ -51,21 +58,28 @@
 	}
 
 	.cookingInfo {
-		@include flex(row, space-evenly, flex-start, wrap);
-		clear: both;
-		font-size: 1.6rem;
+		background: $white;
+		padding: 10vh 0;
+		.wrapper {
+			@include flex(row, space-evenly, flex-start, wrap);
+			clear: both;
+			font-size: 1.6rem;
+		}
 	}
 
 	h3 {
 		text-align: center;
 		width: 100%;
 		padding-top: 20px;
-		background: $accent1;
+		background: $background;
+		border-radius: 5px 5px 0 0;
 	}
 	.ingredients,
 	.instructions {
-		border: 4px solid $accent1;
-		border-radius: 5px;
+		background: $white;
+		border: 1px solid $primary;
+		box-shadow: 0 0 5px 0px $secondary;
+		border-radius: 10px;
 		ol,
 		ul {
 			padding: 0 12px;
@@ -73,7 +87,6 @@
 	}
 
 	.ingredients {
-		background: white;
 		width: calc(50% - 15px);
 		margin-right: 15px;
 		@include flex(column, space-between, flex-start);
@@ -82,9 +95,12 @@
 			margin: 16px 0;
 		}
 		img {
-			width: 70px;
-			max-height: 90px;
+			// width: 70px;
+			// max-height: 90px;
+			width: 20px;
 			margin-right: 10px;
+			border: 1px solid black;
+			border-radius: 5px;
 		}
 	}
 

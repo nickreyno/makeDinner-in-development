@@ -205,51 +205,54 @@ class Recipe extends Component {
 							</p>
 						)}
 					</div>
-					<div className="wrapper">
-						<section className="featuredRecipe clearfix">
-							<p>Ready In: {recipe.readyInMinutes}</p>
-							<p>Serves: {recipe.servings}</p>
-							<img src={recipe.image} alt={recipe.title} />
-							<p className="summaryBlurb">
-								<span role="text" className="beforeLink"></span>
-								{this.state.relatedRecipes.length > 0 ? (
-									<Link
-										className="summaryLink"
-										to={`/recipe/${this.state.relatedRecipes[0].id}`}
-										onClick={() => {
-											this.updateRecipePage(this.state.relatedRecipes[0]);
-										}}
-									>
-										{this.state.relatedRecipes[0].title}
-									</Link>
-								) : null}
-								. Happy Cooking!
-							</p>
-						</section>
-						<section className="cookingInfo">
-							<div className="ingredients">
-								<h3>Ingredients</h3>
-								<ul>
-									{recipe.extendedIngredients.map((item, i) => {
-										return (
-											<li key={item.id}>
-												<img src={`https://spoonacular.com/cdn/ingredients_100x100/${item.image}`} alt="" />
-												<p>{item.original}</p>
-											</li>
-										);
-									})}
-								</ul>
+					<section className="featuredRecipe">
+						<div className="wrapper recipeContainer clearfix">
+								<p>Ready In: {recipe.readyInMinutes}</p>
+								<p>Serves: {recipe.servings}</p>
+								<img src={recipe.image} alt={recipe.title} />
+								<p className="summaryBlurb">
+									<span role="text" className="beforeLink"></span>
+									{this.state.relatedRecipes.length > 0 ? (
+										<Link
+											className="summaryLink"
+											to={`/recipe/${this.state.relatedRecipes[0].id}`}
+											onClick={() => {
+												this.updateRecipePage(this.state.relatedRecipes[0]);
+											}}
+										>
+											{this.state.relatedRecipes[0].title}
+										</Link>
+									) : null}
+									. Happy Cooking!
+								</p>
 							</div>
-							<div className="instructions">
-								<h3>Instructions</h3>
-								<ol>
-									{recipe.analyzedInstructions[0].steps.map((item) => {
-										return <li key={item.number}>{item.step}</li>;
-									})}
-								</ol>
-							</div>
-						</section>
-					</div>
+					</section>
+					<section className="cookingInfo">
+						<div className="wrapper">
+						<div className="ingredients">
+							<h3>Ingredients</h3>
+							<ul>
+								{recipe.extendedIngredients.map((item, i) => {
+									return (
+										<li key={item.id}>
+											{/* <img src={`https://spoonacular.com/cdn/ingredients_100x100/${item.image}`} alt="" /> */}
+											<img className="checkBox" src={require('../assets/checkBox.svg')} alt=""/>
+											<p>✓{item.original}</p>
+										</li>
+									);
+								})}
+							</ul>
+						</div>
+						<div className="instructions">
+							<h3>Instructions</h3>
+							<ol>
+								{recipe.analyzedInstructions[0].steps.map((item) => {
+									return <li key={item.number}>{item.step}</li>;
+								})}
+							</ol>
+						</div>
+						</div>
+					</section>
 					<section className="relatedRecipes">
 						<div className="wrapper">
 							<h2 className="relatedRecipesTitle">Try Similar Recipes</h2>
