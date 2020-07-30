@@ -135,25 +135,28 @@ class Recipe extends Component {
 				});
 			})
 			.catch((err) => {
-				console.log(err.response.status);
-				// if 402 error, switch API key
-				console.log(err.response.status);
-				if (err.response.status != 402) {
-					console.log("figure");
-				}
-				// if 402 error, switch API key
-				if (err.response.status == 402) {
-					const keys = [...this.state.apiKey];
-					keys.shift();
-					console.log(keys);
-					this.setState(
-						{
-							apiKey: keys,
-						},
-						() => {
-							this.relatedRecipesCall(ids);
-						}
-					);
+				// added if err due to poor internet not making axios call properly
+				if (err) {
+					console.log(err.response.status);
+					// if 402 error, switch API key
+					console.log(err.response.status);
+					if (err.response.status != 402) {
+						console.log("figure");
+					}
+					// if 402 error, switch API key
+					if (err.response.status == 402) {
+						const keys = [...this.state.apiKey];
+						keys.shift();
+						console.log(keys);
+						this.setState(
+							{
+								apiKey: keys,
+							},
+							() => {
+								this.relatedRecipesCall(ids);
+							}
+						);
+					}
 				}
 			});
 	};

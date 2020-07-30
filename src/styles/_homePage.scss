@@ -40,6 +40,9 @@ h2 {
 
 footer {
 	// margin-top:15vh;
+	ul {
+		@include flex(row, center, flex-start, wrap);
+	}
 	width: 100%;
 	background: $accent1;
 }

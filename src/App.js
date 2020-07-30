@@ -152,7 +152,7 @@ class App extends Component {
 										this.getResultsLive(this.state.ingredient);
 									}}
 								>
-									<i className="fas fa-search"></i>
+									{/* <i className="fas fa-search"></i> */}
 								</button>
 							</form>
 							<form action="submit">
@@ -224,13 +224,21 @@ class App extends Component {
 					<footer>
 						<div className="wrapper">
 							<ul>
-								<li>placeholder</li>
-								<li>placeholder</li>
-								<li>placeholder</li>
-								<li>placeholder</li>
-								<li>placeholder</li>
-								<li>placeholder</li>
-								<li>placeholder</li>
+								<li>
+									<Link to="/about_us">About us</Link>
+								</li>
+								<li>
+									<Link to="/contact">Contact</Link>
+								</li>
+								<li>
+									<Link to="/FAQ">FAQ</Link>
+								</li>
+								<li>
+									<Link to="/Jobs">Jobs</Link>
+								</li>
+								<li>
+									<Link to="/our_work">Our Work</Link>
+								</li>
 							</ul>
 						</div>
 					</footer>
