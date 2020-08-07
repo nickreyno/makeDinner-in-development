@@ -133,9 +133,9 @@ class App extends Component {
 
 	render() {
 		const results = this.state.resultObj;
-		const param = this.state.browseComponentInfo
+		const param = this.state.browseComponentInfo;
 		return (
-			<Router>
+			<Router basename={process.env.PUBLIC_URL}>
 				<Fragment>
 					<nav>
 						<div className="wrapper">
