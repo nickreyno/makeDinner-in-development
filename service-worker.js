@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/makeDinner-in-development/precache-manifest.550c74b9cc97f022344be746a99f7956.js"
+  "/makeDinner-in-development/precache-manifest.cb7a494aa4f4021f0a99bba967ad5162.js"
 );
 
 self.addEventListener('message', (event) => {

@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "5ba0fcca84a4b0089bfc1434e5f42d06",
+    "revision": "963036d956d904c6641772b9079db0c4",
     "url": "/makeDinner-in-development/index.html"
   },
   {
-    "revision": "b7816fd84399c5bf0823",
+    "revision": "1596f82f48b94c4c19c2",
     "url": "/makeDinner-in-development/static/css/main.e520be0d.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/makeDinner-in-development/static/js/2.dc94eb07.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "b7816fd84399c5bf0823",
-    "url": "/makeDinner-in-development/static/js/main.5e9455e5.chunk.js"
+    "revision": "1596f82f48b94c4c19c2",
+    "url": "/makeDinner-in-development/static/js/main.6a1b2032.chunk.js"
   },
   {
     "revision": "a188964430849ee031e5",
