@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/makeDinner-in-development/static/css/main.e520be0d.chunk.css",
+    "main.js": "/makeDinner-in-development/static/js/main.5e9455e5.chunk.js",
+    "main.js.map": "/makeDinner-in-development/static/js/main.5e9455e5.chunk.js.map",
+    "runtime-main.js": "/makeDinner-in-development/static/js/runtime-main.4560aaf0.js",
+    "runtime-main.js.map": "/makeDinner-in-development/static/js/runtime-main.4560aaf0.js.map",
+    "static/js/2.dc94eb07.chunk.js": "/makeDinner-in-development/static/js/2.dc94eb07.chunk.js",
+    "static/js/2.dc94eb07.chunk.js.map": "/makeDinner-in-development/static/js/2.dc94eb07.chunk.js.map",
+    "index.html": "/makeDinner-in-development/index.html",
+    "precache-manifest.550c74b9cc97f022344be746a99f7956.js": "/makeDinner-in-development/precache-manifest.550c74b9cc97f022344be746a99f7956.js",
+    "service-worker.js": "/makeDinner-in-development/service-worker.js",
+    "static/css/main.e520be0d.chunk.css.map": "/makeDinner-in-development/static/css/main.e520be0d.chunk.css.map",
+    "static/js/2.dc94eb07.chunk.js.LICENSE.txt": "/makeDinner-in-development/static/js/2.dc94eb07.chunk.js.LICENSE.txt",
+    "static/media/checkBox.svg": "/makeDinner-in-development/static/media/checkBox.29edb23b.svg",
+    "static/media/styles.scss": "/makeDinner-in-development/static/media/recipeHeader.40f507d2.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.4560aaf0.js",
+    "static/js/2.dc94eb07.chunk.js",
+    "static/css/main.e520be0d.chunk.css",
+    "static/js/main.5e9455e5.chunk.js"
+  ]
+}
